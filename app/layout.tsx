@@ -1,16 +1,30 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Bricolage_Grotesque, Playfair_Display, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  variable: "--font-instrument-serif",
+  weight: ["400"],
+  display: "swap",
+  preload: true,
+})
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "FeatureGate | Ship Features with Confidence",
-  description: "The modern feature management platform for engineering teams. Deploy safely, experiment freely, and ship with confidence.",
+  title: "Sanctuary | A Place to Learn, Read, and Remember",
+  description: "Courses, teachings, and books to support inner growth, mindful study, and spiritual practice.",
 };
 
 export default function RootLayout({
@@ -21,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${bricolage.variable} font-sans antialiased`}
+        className={`${bricolage.variable} ${playfair.variable} ${instrumentSerif.variable} font-sans antialiased`}
       >
         {children}
       </body>

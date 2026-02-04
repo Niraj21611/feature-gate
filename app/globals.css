@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  /* Core Color System */
-  --ink-black: #0d1321;
-  --deep-space-blue: #1d2d44;
-  --blue-slate: #3e5c76;
-  --dusty-denim: #748cab;
-  --eggshell: #f0ebd8;
-  --accent-blue: #0055ff;
+  /* Spiritual Color System */
+  --earth-dark: #1a1614;
+  --stone-gray: #4a4542;
+  --warm-sand: #e8dfd2;
+  --soft-white: #fdfcfb;
+  --sage-muted: #8a8c7f;
+  --dusk-beige: #c9bba8;
   
   /* Semantic Colors */
-  --background: var(--eggshell);
-  --background-dark: var(--ink-black);
-  --foreground: var(--ink-black);
-  --foreground-muted: var(--blue-slate);
-  --foreground-subtle: var(--dusty-denim);
-  --accent: var(--deep-space-blue);
+  --background: var(--soft-white);
+  --background-dark: var(--earth-dark);
+  --foreground: var(--earth-dark);
+  --foreground-muted: var(--stone-gray);
+  --foreground-subtle: var(--sage-muted);
+  --accent: var(--stone-gray);
   
   /* Surfaces */
   --surface-light: #ffffff;
@@ -30,13 +30,15 @@
 }
 
 @theme inline {
-  --color-ink-black: var(--ink-black);
-  --color-deep-space-blue: var(--deep-space-blue);
-  --color-blue-slate: var(--blue-slate);
-  --color-dusty-denim: var(--dusty-denim);
-  --color-eggshell: var(--eggshell);
-  --color-accent-blue: var(--accent-blue);
+  --color-earth-dark: var(--earth-dark);
+  --color-stone-gray: var(--stone-gray);
+  --color-warm-sand: var(--warm-sand);
+  --color-soft-white: var(--soft-white);
+  --color-sage-muted: var(--sage-muted);
+  --color-dusk-beige: var(--dusk-beige);
   --font-sans: var(--font-bricolage), system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-instrument-serif: 'Instrument Serif', serif;
 }
 
 * {
@@ -49,7 +51,7 @@ html {
 }
 
 body {
-  background: var(--background);
+  background: var(--soft-white);
   color: var(--foreground);
   font-family: var(--font-bricolage), system-ui, sans-serif;
   line-height: 1.6;
@@ -57,8 +59,8 @@ body {
 
 /* Selection */
 ::selection {
-  background: var(--deep-space-blue);
-  color: var(--eggshell);
+  background: var(--warm-sand);
+  color: var(--earth-dark);
 }
 
 /* Smooth scroll behavior */
@@ -79,10 +81,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--dusty-denim);
+  background: var(--sage-muted);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--blue-slate);
+  background: var(--stone-gray);
 }
