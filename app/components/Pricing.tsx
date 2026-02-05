@@ -1,7 +1,11 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+
 const plans = [
   {
     name: "Starter",
-    description: "Perfect for small teams getting started with feature flags.",
+    description: "For small teams getting started.",
     price: "Free",
     priceDetail: "Up to 5 seats",
     features: [
@@ -16,7 +20,7 @@ const plans = [
   },
   {
     name: "Pro",
-    description: "For growing teams that need more power and flexibility.",
+    description: "For growing teams that need more.",
     price: "$49",
     priceDetail: "per seat / month",
     features: [
@@ -24,8 +28,8 @@ const plans = [
       "Unlimited environments",
       "90-day analytics retention",
       "Priority support",
-      "Advanced targeting & segments",
-      "A/B testing & experiments",
+      "Advanced targeting",
+      "A/B testing",
       "Audit logs",
     ],
     cta: "Start free trial",
@@ -34,17 +38,17 @@ const plans = [
   },
   {
     name: "Enterprise",
-    description: "For organizations with advanced security and scale needs.",
+    description: "For organizations at scale.",
     price: "Custom",
     priceDetail: "Contact for pricing",
     features: [
       "Everything in Pro",
-      "Unlimited analytics retention",
-      "SSO & SCIM provisioning",
+      "Unlimited retention",
+      "SSO & SCIM",
       "99.99% uptime SLA",
       "Dedicated success manager",
       "Custom integrations",
-      "On-premise deployment option",
+      "On-premise option",
     ],
     cta: "Contact sales",
     ctaStyle: "secondary",
@@ -52,102 +56,88 @@ const plans = [
 ];
 
 export default function Pricing() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <section id="pricing" className="relative py-24 lg:py-32 bg-eggshell">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="pricing" className="relative py-20 lg:py-28 bg-eggshell">
+      <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
-        <div className="max-w-3xl mx-auto text-center mb-16 lg:mb-20">
-          <p className="text-sm font-semibold text-blue-slate uppercase tracking-wider mb-4">
+        <motion.div
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+          className="max-w-2xl mx-auto text-center mb-12 lg:mb-16"
+        >
+          <p className="text-xs font-semibold text-blue-slate uppercase tracking-widest mb-3">
             Pricing
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink-black leading-tight mb-6">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-ink-black leading-tight mb-4">
             Simple, transparent pricing
           </h2>
-          <p className="text-lg text-dusty-denim leading-relaxed">
-            Start free, scale as you grow. No hidden fees, no surprises.
+          <p className="text-base text-dusty-denim leading-relaxed">
+            Start free, scale as you grow. No hidden fees.
           </p>
-        </div>
+        </motion.div>
 
         {/* Pricing cards */}
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-5">
           {plans.map((plan, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`relative p-8 rounded-2xl lg:rounded-3xl transition-all duration-300 ${
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className={`relative p-6 rounded-xl transition-all duration-300 ${
                 plan.popular
-                  ? "bg-ink-black text-eggshell scale-105 shadow-2xl shadow-ink-black/20"
-                  : "bg-white border border-ink-black/5 hover:shadow-lg hover:shadow-ink-black/5"
+                  ? "bg-ink-black text-eggshell lg:scale-[1.02] shadow-xl shadow-ink-black/15"
+                  : "bg-white border border-ink-black/[0.04] hover:shadow-lg hover:shadow-ink-black/[0.04]"
               }`}
             >
               {/* Popular badge */}
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-blue-slate text-eggshell text-xs font-medium rounded-full">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-blue-slate text-eggshell text-[10px] font-medium rounded-full tracking-wide">
                   Most popular
                 </div>
               )}
 
               {/* Plan header */}
-              <div className="mb-8">
-                <h3
-                  className={`text-xl font-semibold mb-2 ${
-                    plan.popular ? "text-eggshell" : "text-ink-black"
-                  }`}
-                >
+              <div className="mb-6">
+                <h3 className={`text-base font-semibold mb-1 ${plan.popular ? "text-eggshell" : "text-ink-black"}`}>
                   {plan.name}
                 </h3>
-                <p
-                  className={`text-sm ${
-                    plan.popular ? "text-eggshell/70" : "text-dusty-denim"
-                  }`}
-                >
+                <p className={`text-xs ${plan.popular ? "text-eggshell/60" : "text-dusty-denim"}`}>
                   {plan.description}
                 </p>
               </div>
 
               {/* Price */}
-              <div className="mb-8">
-                <div className="flex items-baseline gap-2">
-                  <span
-                    className={`text-4xl lg:text-5xl font-semibold ${
-                      plan.popular ? "text-eggshell" : "text-ink-black"
-                    }`}
-                  >
+              <div className="mb-6">
+                <div className="flex items-baseline gap-1">
+                  <span className={`text-3xl lg:text-4xl font-semibold ${plan.popular ? "text-eggshell" : "text-ink-black"}`}>
                     {plan.price}
                   </span>
                 </div>
-                <p
-                  className={`text-sm mt-1 ${
-                    plan.popular ? "text-eggshell/70" : "text-dusty-denim"
-                  }`}
-                >
+                <p className={`text-xs mt-0.5 ${plan.popular ? "text-eggshell/60" : "text-dusty-denim"}`}>
                   {plan.priceDetail}
                 </p>
               </div>
 
               {/* Features */}
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-2.5 mb-6">
                 {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-start gap-3">
+                  <li key={featureIndex} className="flex items-start gap-2">
                     <svg
-                      className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
-                        plan.popular ? "text-emerald-400" : "text-emerald-600"
-                      }`}
+                      className={`w-4 h-4 mt-0.5 flex-shrink-0 ${plan.popular ? "text-emerald-400" : "text-emerald-500"}`}
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
+                      strokeWidth={2}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span
-                      className={`text-sm ${
-                        plan.popular ? "text-eggshell/90" : "text-ink-black/80"
-                      }`}
-                    >
+                    <span className={`text-xs ${plan.popular ? "text-eggshell/80" : "text-ink-black/70"}`}>
                       {feature}
                     </span>
                   </li>
@@ -155,41 +145,43 @@ export default function Pricing() {
               </ul>
 
               {/* CTA */}
-              <a
+              <motion.a
                 href="#"
-                className={`block w-full py-3.5 text-center text-sm font-medium rounded-full transition-all duration-200 ${
+                whileHover={prefersReducedMotion ? {} : { scale: 1.01 }}
+                whileTap={prefersReducedMotion ? {} : { scale: 0.99 }}
+                className={`block w-full py-2.5 text-center text-sm font-medium rounded-full transition-all duration-300 ${
                   plan.ctaStyle === "primary"
                     ? "bg-eggshell text-ink-black hover:bg-white"
                     : plan.popular
-                    ? "bg-eggshell/10 text-eggshell border border-eggshell/20 hover:bg-eggshell/20"
-                    : "bg-ink-black text-eggshell hover:bg-deep-space-blue"
+                    ? "bg-eggshell/10 text-eggshell border border-eggshell/15 hover:bg-eggshell/15"
+                    : "bg-ink-black text-eggshell hover:shadow-md hover:shadow-ink-black/10"
                 }`}
               >
                 {plan.cta}
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
           ))}
         </div>
 
         {/* FAQ teaser */}
-        <div className="mt-16 text-center">
-          <p className="text-dusty-denim">
+        <motion.div
+          initial={prefersReducedMotion ? false : { opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-12 text-center"
+        >
+          <p className="text-sm text-dusty-denim">
             Have questions?{" "}
-            <a
-              href="#"
-              className="text-blue-slate hover:text-ink-black transition-colors duration-200 underline underline-offset-4"
-            >
+            <a href="#" className="text-blue-slate hover:text-ink-black transition-colors duration-300 underline underline-offset-4 decoration-ink-black/10 hover:decoration-ink-black/30">
               Check our FAQ
             </a>{" "}
             or{" "}
-            <a
-              href="#"
-              className="text-blue-slate hover:text-ink-black transition-colors duration-200 underline underline-offset-4"
-            >
+            <a href="#" className="text-blue-slate hover:text-ink-black transition-colors duration-300 underline underline-offset-4 decoration-ink-black/10 hover:decoration-ink-black/30">
               contact our team
             </a>
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

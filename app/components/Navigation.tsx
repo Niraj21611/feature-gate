@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 const navLinks = [
   { label: "Product", href: "#product" },
@@ -45,27 +45,29 @@ export default function Navigation() {
 
   return (
     <motion.nav
-      initial={prefersReducedMotion ? false : { opacity: 0, y: -10 }}
+      initial={prefersReducedMotion ? false : { opacity: 0, y: -8 }}
       animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
       transition={
-        prefersReducedMotion
-          ? undefined
-          : { duration: 0.26, ease: "easeOut" }
+        prefersReducedMotion ? undefined : { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }
       }
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
         scrolled
-          ? "bg-eggshell/80 backdrop-blur-xl border-b border-ink-black/5"
+          ? "bg-eggshell/90 backdrop-blur-2xl border-b border-ink-black/[0.04] shadow-sm shadow-ink-black/[0.02]"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="flex items-center justify-between h-14 lg:h-16">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-ink-black rounded-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-105">
+          <a href="/" className="flex items-center gap-2.5 group">
+            <motion.div 
+              whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+              className="w-7 h-7 bg-ink-black rounded-md flex items-center justify-center"
+            >
               <svg
-                width="16"
-                height="16"
+                width="14"
+                height="14"
                 viewBox="0 0 24 24"
                 fill="none"
                 className="text-eggshell"
@@ -78,56 +80,66 @@ export default function Navigation() {
                   strokeLinejoin="round"
                 />
               </svg>
-            </div>
-            <span className="text-ink-black font-semibold text-lg tracking-tight">
+            </motion.div>
+            <span className="text-ink-black font-semibold text-base tracking-tight">
               FeatureGate
             </span>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setActiveHref(link.href)}
-                className={`px-4 py-2 text-sm font-medium transition-colors duration-200 underline decoration-2 underline-offset-[10px] ${
-                  activeHref === link.href
-                    ? "text-accent-blue decoration-accent-blue/60"
-                    : "text-blue-slate hover:text-ink-black decoration-transparent hover:decoration-ink-black/10"
-                }`}
-              >
-                {link.label}
-              </a>
-            ))}
+          <div className="hidden lg:flex items-center">
+            <div className="flex items-center gap-0.5 bg-ink-black/[0.03] rounded-full p-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setActiveHref(link.href)}
+                  className={`relative px-4 py-1.5 text-sm font-medium transition-all duration-300 rounded-full ${
+                    activeHref === link.href
+                      ? "text-ink-black"
+                      : "text-blue-slate hover:text-ink-black"
+                  }`}
+                >
+                  {activeHref === link.href && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 bg-white rounded-full shadow-sm"
+                      transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
+                    />
+                  )}
+                  <span className="relative z-10">{link.label}</span>
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* CTA Buttons */}
+          <div className="hidden lg:flex items-center gap-2">
             <a
               href="#"
-              className="text-sm font-medium text-blue-slate hover:text-ink-black transition-colors duration-200 px-4 py-2"
+              className="text-sm font-medium text-blue-slate hover:text-ink-black transition-colors duration-300 px-3 py-1.5"
             >
               Sign in
             </a>
-            <a
+            <motion.a
               href="#"
-              className="group relative inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-eggshell bg-ink-black rounded-full hover:bg-deep-space-blue transition-all duration-200 hover:shadow-lg hover:shadow-ink-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue/30 focus-visible:ring-offset-2 focus-visible:ring-offset-eggshell"
+              whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
+              whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
+              className="relative px-5 py-2 text-sm font-medium text-eggshell bg-ink-black rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-ink-black/15"
             >
-              Get Started
-              <span className="pointer-events-none absolute left-5 right-5 bottom-2 h-px bg-accent-blue/35 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
-            </a>
+              <span className="relative z-10">Get Started</span>
+            </motion.a>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-ink-black"
+            className="lg:hidden p-2 text-ink-black rounded-lg hover:bg-ink-black/5 transition-colors duration-200"
             aria-label="Toggle menu"
           >
             <svg
-              width="24"
-              height="24"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -138,50 +150,61 @@ export default function Navigation() {
               {mobileMenuOpen ? (
                 <path d="M18 6L6 18M6 6l12 12" />
               ) : (
-                <path d="M3 12h18M3 6h18M3 18h18" />
+                <path d="M4 12h16M4 6h16M4 18h16" />
               )}
             </svg>
           </button>
         </div>
 
         {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-ink-black/5">
-            <div className="flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => {
-                    setActiveHref(link.href);
-                    setMobileMenuOpen(false);
-                  }}
-                  className={`px-4 py-3 text-base font-medium rounded-lg transition-colors duration-200 ${
-                    activeHref === link.href
-                      ? "text-accent-blue bg-ink-black/5"
-                      : "text-blue-slate hover:text-ink-black hover:bg-ink-black/5"
-                  }`}
-                >
-                  {link.label}
-                </a>
-              ))}
-              <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-ink-black/5">
-                <a
-                  href="#"
-                  className="px-4 py-3 text-base font-medium text-blue-slate hover:text-ink-black transition-colors duration-200"
-                >
-                  Sign in
-                </a>
-                <a
-                  href="#"
-                  className="mx-4 inline-flex items-center justify-center px-5 py-3 text-base font-medium text-eggshell bg-ink-black rounded-full hover:bg-deep-space-blue transition-all duration-200"
-                >
-                  Get Started
-                </a>
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="lg:hidden overflow-hidden"
+            >
+              <div className="py-4 space-y-1">
+                {navLinks.map((link, index) => (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    onClick={() => {
+                      setActiveHref(link.href);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`block px-4 py-2.5 text-base font-medium rounded-lg transition-all duration-200 ${
+                      activeHref === link.href
+                        ? "text-ink-black bg-white shadow-sm"
+                        : "text-blue-slate hover:text-ink-black hover:bg-ink-black/[0.03]"
+                    }`}
+                  >
+                    {link.label}
+                  </motion.a>
+                ))}
+                <div className="pt-4 mt-4 border-t border-ink-black/[0.05] space-y-2">
+                  <a
+                    href="#"
+                    className="block px-4 py-2.5 text-base font-medium text-blue-slate hover:text-ink-black transition-colors duration-200"
+                  >
+                    Sign in
+                  </a>
+                  <a
+                    href="#"
+                    className="block mx-4 text-center px-5 py-2.5 text-base font-medium text-eggshell bg-ink-black rounded-full transition-all duration-200"
+                  >
+                    Get Started
+                  </a>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.nav>
   );
