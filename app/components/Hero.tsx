@@ -88,9 +88,9 @@ export default function Hero() {
           <div className="relative bg-white rounded-xl border border-slate-200 shadow-2xl shadow-slate-200/50 overflow-hidden">
             <div className="h-10 border-b border-slate-100 bg-slate-50/50 flex items-center px-4 gap-2">
               <div className="flex gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-                <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-                <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                <div className="w-2.5 h-2.5 rounded-full bg-slate-400" />
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
               </div>
             </div>
 

@@ -1,8 +1,24 @@
 @import "tailwindcss";
 
+
 :root {
   --font-inter: ui-sans-serif;
 }
+
+@font-face {
+  font-family: "Cooper Lt BT";
+  src: url("/fonts/cooper.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-cooper {
+  font-family: "Cooper Lt BT", serif;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
 
 @theme inline {
   /* Minimal shadcn-like tokens (so `border-border`, `bg-card`, etc. work) */
@@ -13,7 +29,6 @@
   --color-foreground: #f8fafc; /* slate-50 */
   --color-primary: #ec4e02; /* accent orange from component */
   --color-primary-foreground: #0b0f14;
-
   --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import localFont from "next/font/local";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -9,6 +10,7 @@ const inter = Inter({
   display: "swap",
   preload: true,
 });
+
 
 export const metadata: Metadata = {
   title: "FeatureFlow - Intelligent Feature Management",

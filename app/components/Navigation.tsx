@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Layers, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Product", href: "#product" },
@@ -35,14 +36,12 @@ export default function Navigation() {
         <div className="mx-auto max-w-6xl h-full border-x border-slate-200/60" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center shadow-lg shadow-slate-200 transition-transform group-hover:scale-105">
-            <Layers className="w-4 h-4" aria-hidden />
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between ">
+        <a href="#" className="flex items-center group mb-1">
+          <div className="flex items-center justify-center">
+          <Image src="/feature-logo.png"  width={40} height={40} alt="Brand logo" />
           </div>
-          <span className="font-semibold text-slate-900 tracking-tight">
-            FeatureFlow
-          </span>
+         
         </a>
 
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
