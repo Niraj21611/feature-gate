@@ -1,44 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  /* Spiritual Color System */
-  --earth-dark: #1a1614;
-  --stone-gray: #4a4542;
-  --warm-sand: #e8dfd2;
-  --soft-white: #fdfcfb;
-  --sage-muted: #8a8c7f;
-  --dusk-beige: #c9bba8;
-  
-  /* Semantic Colors */
-  --background: var(--soft-white);
-  --background-dark: var(--earth-dark);
-  --foreground: var(--earth-dark);
-  --foreground-muted: var(--stone-gray);
-  --foreground-subtle: var(--sage-muted);
-  --accent: var(--stone-gray);
-  
-  /* Surfaces */
-  --surface-light: #ffffff;
-  --surface-elevated: rgba(255, 255, 255, 0.7);
-  --surface-glass: rgba(255, 255, 255, 0.4);
-  --surface-dark: var(--deep-space-blue);
-  
-  /* Borders */
-  --border-light: rgba(13, 19, 33, 0.08);
-  --border-medium: rgba(13, 19, 33, 0.12);
-  --border-dark: rgba(240, 235, 216, 0.1);
+  --font-inter: ui-sans-serif;
 }
 
 @theme inline {
-  --color-earth-dark: var(--earth-dark);
-  --color-stone-gray: var(--stone-gray);
-  --color-warm-sand: var(--warm-sand);
-  --color-soft-white: var(--soft-white);
-  --color-sage-muted: var(--sage-muted);
-  --color-dusk-beige: var(--dusk-beige);
-  --font-sans: var(--font-bricolage), system-ui, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-instrument-serif: 'Instrument Serif', serif;
+  /* Minimal shadcn-like tokens (so `border-border`, `bg-card`, etc. work) */
+  --color-border: rgba(148, 163, 184, 0.35); /* slate-400-ish */
+  --color-card: #0b0f14; /* deep near-black for the dithering card */
+  --color-muted: rgba(148, 163, 184, 0.12);
+  --color-muted-foreground: rgba(226, 232, 240, 0.72);
+  --color-foreground: #f8fafc; /* slate-50 */
+  --color-primary: #ec4e02; /* accent orange from component */
+  --color-primary-foreground: #0b0f14;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
 * {
@@ -51,16 +27,8 @@ html {
 }
 
 body {
-  background: var(--soft-white);
-  color: var(--foreground);
-  font-family: var(--font-bricolage), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   line-height: 1.6;
-}
-
-/* Selection */
-::selection {
-  background: var(--warm-sand);
-  color: var(--earth-dark);
 }
 
 /* Smooth scroll behavior */
@@ -71,20 +39,31 @@ body {
 }
 
 /* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
 
-::-webkit-scrollbar-track {
-  background: transparent;
+/* Animation Classes (matches provided HTML) */
+.reveal-text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-::-webkit-scrollbar-thumb {
-  background: var(--sage-muted);
-  border-radius: 4px;
+.reveal-text.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
+.stagger-1 { transition-delay: 100ms; }
+.stagger-2 { transition-delay: 200ms; }
+.stagger-3 { transition-delay: 300ms; }
+.stagger-4 { transition-delay: 400ms; }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--stone-gray);
+/* Subtle Gradient Text */
+.text-gradient {
+  background: linear-gradient(to right, #0f172a, #334155);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

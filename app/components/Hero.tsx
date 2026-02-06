@@ -1,368 +1,270 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { CTASection } from "@/components/ui/hero-dithering-card";
+
 
 export default function Hero() {
-  const prefersReducedMotion = useReducedMotion();
-
-  const container = {
-    hidden: { opacity: 1 },
-    show: {
-      opacity: 1,
-      transition: prefersReducedMotion
-        ? undefined
-        : {
-            staggerChildren: 0.045,
-            delayChildren: 0.08,
-          },
-    },
-  };
-
-  const word = {
-    hidden: prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 },
-    show: prefersReducedMotion
-      ? { opacity: 1, y: 0 }
-      : {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.34, ease: "easeOut" },
-        },
-  };
-
+  // Styling + animation behavior is driven by the provided Tailwind classes
+  // and the global `.reveal-text` IntersectionObserver in `app/page.tsx`.
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-eggshell via-eggshell to-white pt-20">
-      {/* Subtle architectural grid (extremely low contrast) */}
-      <motion.div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.10]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(13, 19, 33, 0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(13, 19, 33, 0.055) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-          WebkitMaskImage:
-            "radial-gradient(ellipse at center, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 48%, rgba(0,0,0,0) 78%)",
-          maskImage:
-            "radial-gradient(ellipse at center, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 48%, rgba(0,0,0,0) 78%)",
-          willChange: "transform",
-        }}
-        initial={prefersReducedMotion ? false : { x: 0, y: 0 }}
-        animate={prefersReducedMotion ? undefined : { x: -18, y: -12 }}
-        transition={
-          prefersReducedMotion
-            ? undefined
-            : {
-                duration: 42,
-                ease: "linear",
-                repeat: Infinity,
-                repeatType: "mirror",
-              }
-        }
-      />
+    <section className="relative pt-32 pb-20 md:pt-16 md:pb-32 overflow-hidden border-b border-slate-200/60">
+      {/* Frame lines + top divider (match screenshot #2) */}
 
-      {/* Gradient orbs */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-dusty-denim/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-blue-slate/10 rounded-full blur-3xl" />
+      <div aria-hidden className="absolute inset-0 pointer-events-none">
+        <div className="mx-auto max-w-6xl h-full border-x border-slate-200/60" />
+        <div className="mx-auto max-w-6xl border-t border-slate-200/60" />
+      </div>
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-50 via-white to-white -z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-indigo-50/50 rounded-full blur-[120px] -z-10 opacity-60" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-          {/* Content */}
-          <div className="text-center lg:text-left">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-ink-black/5 rounded-full mb-8">
-              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-blue-slate">
-                Now available for enterprise teams
-              </span>
-            </div>
+      <div className="max-w-full mx-auto px-6 text-center">
 
-            {/* Headline */}
-            <motion.h1
-              variants={container}
-              initial="hidden"
-              animate="show"
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold text-ink-black leading-[1.1] tracking-tight mb-6"
+        {/* <div className="reveal-text flex justify-center mb-8">
+          <a
+            href="#"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:border-slate-300 transition-colors"
+          >
+            <span className="flex h-2 w-2 rounded-full bg-indigo-500" />
+            <span className="tracking-wide">New: Visual Flag Editor →</span>
+          </a>
+        </div>
+
+        <h1 className="reveal-text stagger-1 text-5xl md:text-7xl font-semibold text-slate-900 tracking-tight mb-6 leading-[1.1]">
+          Deploy at the <br className="hidden md:block" />
+          <span className="text-slate-400">speed of thought.</span>
+        </h1>
+
+        <p className="reveal-text stagger-2 text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+          Decouple release from deployment. Manage features, run experiments, and
+          rollback instantly without touching a line of code.
+        </p>
+
+        <div className="reveal-text stagger-3 flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
+          <button className="w-full sm:w-auto px-8 py-3.5 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-800 hover:scale-[1.02] transition-all shadow-xl shadow-slate-200 flex items-center justify-center gap-2">
+            Start Building
+            <svg
+              aria-hidden
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <span className="block">
-                {["Ship", "features"].map((w) => (
-                  <motion.span
-                    key={w}
-                    variants={word}
-                    className="inline-block"
-                  >
-                    {w}&nbsp;
-                  </motion.span>
-                ))}
-              </span>
-              <span className="block">
-                <motion.span
-                  variants={word}
-                  className="inline-block text-blue-slate"
-                >
-                  with&nbsp;
-                </motion.span>
-                <motion.span
-                  variants={word}
-                  className="inline-block text-accent-blue"
-                >
-                  confidence
-                </motion.span>
-              </span>
-            </motion.h1>
-
-            {/* Subtext */}
-            <motion.p
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
-              animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={
-                prefersReducedMotion
-                  ? undefined
-                  : { duration: 0.38, ease: "easeOut", delay: 0.22 }
-              }
-              className="text-lg lg:text-xl text-dusty-denim leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10"
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </button>
+          <button className="w-full sm:w-auto px-8 py-3.5 bg-white border border-slate-200 text-slate-600 text-sm font-medium rounded-full hover:bg-slate-50 hover:border-slate-300 transition-all flex items-center justify-center gap-2">
+            <svg
+              aria-hidden
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              The modern feature management platform that helps engineering
-              teams <span className="text-accent-blue">deploy safely</span>,
-              experiment freely, and iterate faster than ever before.
-            </motion.p>
+              <circle cx="12" cy="12" r="10" />
+              <polygon points="10 8 16 12 10 16 10 8" />
+            </svg>
+            Watch Demo
+          </button>
+        </div> */}
 
-            {/* CTAs */}
-            <motion.div
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
-              animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={
-                prefersReducedMotion
-                  ? undefined
-                  : { duration: 0.32, ease: "easeOut", delay: 0.32 }
-              }
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-            >
-              <a
-                href="#"
-                className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-medium text-eggshell bg-ink-black rounded-full hover:bg-deep-space-blue transition-all duration-200 hover:shadow-xl hover:shadow-ink-black/15 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue/30 focus-visible:ring-offset-2 focus-visible:ring-offset-eggshell"
-              >
-                Start for free
-                <svg
-                  className="ml-2 w-4 h-4 text-eggshell group-hover:text-eggshell"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-                <span className="pointer-events-none absolute left-8 right-8 bottom-3 h-px bg-accent-blue/35 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
-              </a>
-              <a
-                href="#"
-                className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-ink-black bg-white border border-ink-black/10 rounded-full hover:bg-ink-black/5 hover:border-ink-black/20 transition-all duration-200"
-              >
-                <svg
-                  className="mr-2 w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                Watch demo
-              </a>
-            </motion.div>
+        <CTASection/>
 
-            {/* Social proof mini */}
-            <div className="mt-12 pt-8 border-t border-ink-black/5">
-              <p className="text-sm text-dusty-denim mb-4">
-                Trusted by forward-thinking teams
-              </p>
-              <div className="flex items-center justify-center lg:justify-start gap-8 opacity-60">
-                {["Vercel", "Stripe", "Linear", "Notion"].map((company) => (
-                  <span
-                    key={company}
-                    className="text-sm font-semibold text-ink-black/70 tracking-wide"
-                  >
-                    {company}
-                  </span>
-                ))}
+        {/* Inner frame divider (between CTAs and mock) */}
+        <div
+          aria-hidden
+          className="reveal-text stagger-4 w-screen relative left-1/2 -translate-x-1/2 border-t border-slate-200/60 mb-16"
+        />
+
+        <div className="reveal-text stagger-4 relative max-w-5xl mx-auto">
+          <div className="relative bg-white rounded-xl border border-slate-200 shadow-2xl shadow-slate-200/50 overflow-hidden">
+            <div className="h-10 border-b border-slate-100 bg-slate-50/50 flex items-center px-4 gap-2">
+              <div className="flex gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
+                <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
+                <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
               </div>
             </div>
-          </div>
 
-          {/* Visual */}
-          <div className="relative">
-            <motion.div
-              className="relative"
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
-              animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={
-                prefersReducedMotion
-                  ? undefined
-                  : { duration: 0.44, ease: "easeOut", delay: 0.18 }
-              }
-            >
-              {/* Main card */}
-              <div className="relative bg-white rounded-2xl lg:rounded-3xl shadow-2xl shadow-ink-black/10 border border-ink-black/5 overflow-hidden">
-                {/* Window header */}
-                <div className="flex items-center gap-2 px-4 py-3 bg-ink-black/[0.02] border-b border-ink-black/5">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-ink-black/10" />
-                    <div className="w-3 h-3 rounded-full bg-ink-black/10" />
-                    <div className="w-3 h-3 rounded-full bg-ink-black/10" />
-                  </div>
-                  <div className="flex-1 flex justify-center">
-                    <div className="px-4 py-1 bg-ink-black/5 rounded-md text-xs text-dusty-denim">
-                      dashboard.featuregate.io
-                    </div>
-                  </div>
+            <div className="p-8 text-left">
+              <div className="flex justify-between items-end mb-8">
+                <div>
+                  <h3 className="text-slate-900 font-semibold text-lg">
+                    Production Flags
+                  </h3>
+                  <p className="text-sm text-slate-500 mt-1">
+                    Filtering by active status
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <button className="text-xs font-medium text-slate-600 bg-white border border-slate-200 px-3 py-1.5 rounded-md hover:bg-slate-50 transition">
+                    Filter
+                  </button>
+                  <button className="text-xs font-medium text-white bg-slate-900 px-3 py-1.5 rounded-md hover:bg-slate-800 transition shadow-sm">
+                    + New Flag
+                  </button>
+                </div>
+              </div>
+
+              <div className="w-full">
+                <div className="grid grid-cols-12 gap-4 border-b border-slate-100 pb-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                  <div className="col-span-5 pl-2">Feature</div>
+                  <div className="col-span-3">Environment</div>
+                  <div className="col-span-3">Targeting</div>
+                  <div className="col-span-1 text-right pr-2">State</div>
                 </div>
 
-                {/* Dashboard content */}
-                <div className="p-6 lg:p-8">
-                  {/* Header */}
-                  <div className="flex items-center justify-between mb-8">
-                    <div>
-                      <h3 className="text-lg font-semibold text-ink-black">
-                        Feature Flags
-                      </h3>
-                      <p className="text-sm text-dusty-denim">
-                        12 active features
-                      </p>
-                    </div>
-                    <button className="px-4 py-2 bg-ink-black text-eggshell text-sm font-medium rounded-lg">
-                      + New Flag
-                    </button>
-                  </div>
-
-                  {/* Feature list */}
-                  <div className="space-y-3">
-                    {[
-                      {
-                        name: "dark-mode",
-                        status: true,
-                        users: "100%",
-                        env: "Production",
-                      },
-                      {
-                        name: "new-checkout",
-                        status: true,
-                        users: "25%",
-                        env: "Canary",
-                      },
-                      {
-                        name: "ai-assistant",
-                        status: false,
-                        users: "0%",
-                        env: "Development",
-                      },
-                      {
-                        name: "redesigned-nav",
-                        status: true,
-                        users: "50%",
-                        env: "Experiment",
-                      },
-                    ].map((feature) => (
-                      <div
-                        key={feature.name}
-                        className="flex items-center justify-between p-4 bg-ink-black/[0.02] rounded-xl hover:bg-ink-black/[0.04] transition-colors duration-200"
+                <div className="grid grid-cols-12 gap-4 py-4 border-b border-slate-50 items-center hover:bg-slate-50/80 transition-colors rounded-lg -mx-2 px-2 group cursor-default">
+                  <div className="col-span-5 flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                      <svg
+                        aria-hidden
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       >
-                        <div className="flex items-center gap-3">
-                          <div
-                            className={`w-2 h-2 rounded-full ${
-                              feature.status ? "bg-emerald-500" : "bg-ink-black/20"
-                            }`}
-                          />
-                          <code className="text-sm font-medium text-ink-black">
-                            {feature.name}
-                          </code>
-                        </div>
-                        <div className="flex items-center gap-4">
-                          <span className="text-xs text-dusty-denim">
-                            {feature.users}
-                          </span>
-                          <span
-                            className={`px-2 py-1 text-xs font-medium rounded-md ${
-                              feature.env === "Production"
-                                ? "bg-emerald-50 text-emerald-700"
-                                : feature.env === "Canary"
-                                ? "bg-amber-50 text-amber-700"
-                                : feature.env === "Experiment"
-                                ? "bg-purple-50 text-purple-700"
-                                : "bg-ink-black/5 text-dusty-denim"
-                            }`}
-                          >
-                            {feature.env}
-                          </span>
-                        </div>
+                        <path d="m12 2 3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium text-slate-900">
+                        AI Assistance v2
                       </div>
-                    ))}
+                      <div className="text-xs text-slate-400 font-mono mt-0.5">
+                        feat-ai-beta
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-span-3">
+                    <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded">
+                      Production
+                    </span>
+                  </div>
+                  <div className="col-span-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-slate-600">50% Users</span>
+                      <div className="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                        <div className="w-1/2 h-full bg-indigo-500 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-span-1 flex justify-end">
+                    <div className="w-9 h-5 bg-emerald-500 rounded-full relative cursor-pointer shadow-sm transition-colors">
+                      <div className="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow-sm" />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Floating elements */}
-              <div className="absolute -top-6 -right-6 bg-white rounded-xl shadow-xl shadow-ink-black/10 border border-ink-black/5 p-4 hidden lg:block">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
-                    <svg
-                      className="w-5 h-5 text-emerald-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
+                <div className="grid grid-cols-12 gap-4 py-4 border-b border-slate-50 items-center hover:bg-slate-50/80 transition-colors rounded-lg -mx-2 px-2 group cursor-default">
+                  <div className="col-span-5 flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center">
+                      <svg
+                        aria-hidden
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                      />
-                    </svg>
+                      >
+                        <circle cx="8" cy="21" r="1" />
+                        <circle cx="19" cy="21" r="1" />
+                        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium text-slate-900">
+                        New Checkout Flow
+                      </div>
+                      <div className="text-xs text-slate-400 font-mono mt-0.5">
+                        checkout-optimize
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold text-ink-black">+23%</p>
-                    <p className="text-xs text-dusty-denim">Conversion</p>
+                  <div className="col-span-3">
+                    <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded">
+                      Staging
+                    </span>
+                  </div>
+                  <div className="col-span-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-slate-600">
+                        Internal Only
+                      </span>
+                      <div className="flex -space-x-1">
+                        <div className="w-4 h-4 rounded-full bg-slate-200 border border-white" />
+                        <div className="w-4 h-4 rounded-full bg-slate-300 border border-white" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-span-1 flex justify-end">
+                    <div className="w-9 h-5 bg-emerald-500 rounded-full relative cursor-pointer shadow-sm transition-colors">
+                      <div className="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow-sm" />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-xl shadow-ink-black/10 border border-ink-black/5 p-4 hidden lg:block">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
-                    <svg
-                      className="w-5 h-5 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
+                <div className="grid grid-cols-12 gap-4 py-4 items-center hover:bg-slate-50/80 transition-colors rounded-lg -mx-2 px-2 group cursor-default">
+                  <div className="col-span-5 flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center">
+                      <svg
+                        aria-hidden
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
+                      >
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4h8v2" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                        <path d="M10 11v6" />
+                        <path d="M14 11v6" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium text-slate-900">
+                        Legacy API
+                      </div>
+                      <div className="text-xs text-slate-400 font-mono mt-0.5">
+                        api-v1-deprecate
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold text-ink-black">
-                      99.99%
-                    </p>
-                    <p className="text-xs text-dusty-denim">Uptime</p>
+                  <div className="col-span-3">
+                    <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded">
+                      Production
+                    </span>
+                  </div>
+                  <div className="col-span-3">
+                    <span className="text-xs text-slate-400">0% Users</span>
+                  </div>
+                  <div className="col-span-1 flex justify-end">
+                    <div className="w-9 h-5 bg-slate-200 rounded-full relative cursor-pointer shadow-inner transition-colors">
+                      <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow-sm" />
+                    </div>
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

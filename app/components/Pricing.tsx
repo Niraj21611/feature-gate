@@ -53,17 +53,14 @@ const plans = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="relative py-24 lg:py-32 bg-eggshell">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="pricing" className="py-24 bg-white">
+      <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
-        <div className="max-w-3xl mx-auto text-center mb-16 lg:mb-20">
-          <p className="text-sm font-semibold text-blue-slate uppercase tracking-wider mb-4">
-            Pricing
-          </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink-black leading-tight mb-6">
+        <div className="text-center max-w-2xl mx-auto mb-20">
+          <h2 className="reveal-text text-3xl md:text-4xl font-semibold text-slate-900 tracking-tight mb-4">
             Simple, transparent pricing
           </h2>
-          <p className="text-lg text-dusty-denim leading-relaxed">
+          <p className="reveal-text stagger-1 text-slate-500 text-lg">
             Start free, scale as you grow. No hidden fees, no surprises.
           </p>
         </div>
@@ -73,15 +70,15 @@ export default function Pricing() {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`relative p-8 rounded-2xl lg:rounded-3xl transition-all duration-300 ${
+              className={`relative p-8 rounded-2xl transition-all duration-300 ${
                 plan.popular
-                  ? "bg-ink-black text-eggshell scale-105 shadow-2xl shadow-ink-black/20"
-                  : "bg-white border border-ink-black/5 hover:shadow-lg hover:shadow-ink-black/5"
+                  ? "bg-slate-900 text-white scale-105 shadow-2xl shadow-slate-200"
+                  : "bg-white border border-slate-100 hover:shadow-xl hover:shadow-slate-200/50"
               }`}
             >
               {/* Popular badge */}
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-blue-slate text-eggshell text-xs font-medium rounded-full">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-indigo-500 text-white text-xs font-medium rounded-full">
                   Most popular
                 </div>
               )}
@@ -90,14 +87,14 @@ export default function Pricing() {
               <div className="mb-8">
                 <h3
                   className={`text-xl font-semibold mb-2 ${
-                    plan.popular ? "text-eggshell" : "text-ink-black"
+                    plan.popular ? "text-white" : "text-slate-900"
                   }`}
                 >
                   {plan.name}
                 </h3>
                 <p
                   className={`text-sm ${
-                    plan.popular ? "text-eggshell/70" : "text-dusty-denim"
+                    plan.popular ? "text-white/70" : "text-slate-500"
                   }`}
                 >
                   {plan.description}
@@ -109,7 +106,7 @@ export default function Pricing() {
                 <div className="flex items-baseline gap-2">
                   <span
                     className={`text-4xl lg:text-5xl font-semibold ${
-                      plan.popular ? "text-eggshell" : "text-ink-black"
+                      plan.popular ? "text-white" : "text-slate-900"
                     }`}
                   >
                     {plan.price}
@@ -117,7 +114,7 @@ export default function Pricing() {
                 </div>
                 <p
                   className={`text-sm mt-1 ${
-                    plan.popular ? "text-eggshell/70" : "text-dusty-denim"
+                    plan.popular ? "text-white/70" : "text-slate-500"
                   }`}
                 >
                   {plan.priceDetail}
@@ -130,7 +127,7 @@ export default function Pricing() {
                   <li key={featureIndex} className="flex items-start gap-3">
                     <svg
                       className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
-                        plan.popular ? "text-emerald-400" : "text-emerald-600"
+                        plan.popular ? "text-emerald-300" : "text-emerald-600"
                       }`}
                       fill="none"
                       viewBox="0 0 24 24"
@@ -145,7 +142,7 @@ export default function Pricing() {
                     </svg>
                     <span
                       className={`text-sm ${
-                        plan.popular ? "text-eggshell/90" : "text-ink-black/80"
+                        plan.popular ? "text-white/90" : "text-slate-700"
                       }`}
                     >
                       {feature}
@@ -159,10 +156,10 @@ export default function Pricing() {
                 href="#"
                 className={`block w-full py-3.5 text-center text-sm font-medium rounded-full transition-all duration-200 ${
                   plan.ctaStyle === "primary"
-                    ? "bg-eggshell text-ink-black hover:bg-white"
+                    ? "bg-white text-slate-900 hover:bg-slate-50"
                     : plan.popular
-                    ? "bg-eggshell/10 text-eggshell border border-eggshell/20 hover:bg-eggshell/20"
-                    : "bg-ink-black text-eggshell hover:bg-deep-space-blue"
+                    ? "bg-white/10 text-white border border-white/20 hover:bg-white/15"
+                    : "bg-slate-900 text-white hover:bg-slate-800"
                 }`}
               >
                 {plan.cta}
@@ -173,18 +170,18 @@ export default function Pricing() {
 
         {/* FAQ teaser */}
         <div className="mt-16 text-center">
-          <p className="text-dusty-denim">
+          <p className="text-slate-500">
             Have questions?{" "}
             <a
               href="#"
-              className="text-blue-slate hover:text-ink-black transition-colors duration-200 underline underline-offset-4"
+              className="text-slate-900 transition-colors duration-200 underline underline-offset-4"
             >
               Check our FAQ
             </a>{" "}
             or{" "}
             <a
               href="#"
-              className="text-blue-slate hover:text-ink-black transition-colors duration-200 underline underline-offset-4"
+              className="text-slate-900 transition-colors duration-200 underline underline-offset-4"
             >
               contact our team
             </a>
