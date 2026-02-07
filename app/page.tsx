@@ -1,15 +1,16 @@
 "use client";
 
+import CTA from "@/components/landing/CTA";
+import Features from "@/components/landing/Features";
+import Footer from "@/components/landing/Footer";
+import Hero from "@/components/landing/Hero";
+import Navigation from "@/components/landing/Navigation";
+import Pricing from "@/components/landing/Pricing";
+import ProductPreview from "@/components/landing/ProductPreview";
+import SocialProof from "@/components/landing/SocialProof";
+import UseCases from "@/components/landing/UseCases";
 import { useEffect } from "react";
-import Navigation from "./components/Navigation";
-import Hero from "./components/Hero";
-import SocialProof from "./components/SocialProof";
-import Features from "./components/Features";
-import ProductPreview from "./components/ProductPreview";
-import UseCases from "./components/UseCases";
-import Pricing from "./components/Pricing";
-import CTA from "./components/CTA";
-import Footer from "./components/Footer";
+
 
 export default function Home() {
   useEffect(() => {

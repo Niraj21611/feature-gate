@@ -221,7 +221,7 @@ export default function Page() {
             <div className="w-full h-full rounded-lg border border-slate-200/60 overflow-hidden bg-slate-50">
               <video
                 className="w-full h-full object-cover"
-                src="/assets/video-1.mp4"
+                src="/assets/video.mp4"
                 autoPlay
                 loop
                 muted

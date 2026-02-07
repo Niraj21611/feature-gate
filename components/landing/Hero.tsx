@@ -1,6 +1,7 @@
 "use client";
 
-import { CTASection } from "@/components/ui/hero-dithering-card";
+import { CTASection } from "./hero-dithering-card";
+
 
 
 export default function Hero() {
@@ -19,65 +20,7 @@ export default function Hero() {
 
       <div className="max-w-full mx-auto px-6 text-center">
 
-        {/* <div className="reveal-text flex justify-center mb-8">
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:border-slate-300 transition-colors"
-          >
-            <span className="flex h-2 w-2 rounded-full bg-indigo-500" />
-            <span className="tracking-wide">New: Visual Flag Editor →</span>
-          </a>
-        </div>
-
-        <h1 className="reveal-text stagger-1 text-5xl md:text-7xl font-semibold text-slate-900 tracking-tight mb-6 leading-[1.1]">
-          Deploy at the <br className="hidden md:block" />
-          <span className="text-slate-400">speed of thought.</span>
-        </h1>
-
-        <p className="reveal-text stagger-2 text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-          Decouple release from deployment. Manage features, run experiments, and
-          rollback instantly without touching a line of code.
-        </p>
-
-        <div className="reveal-text stagger-3 flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
-          <button className="w-full sm:w-auto px-8 py-3.5 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-800 hover:scale-[1.02] transition-all shadow-xl shadow-slate-200 flex items-center justify-center gap-2">
-            Start Building
-            <svg
-              aria-hidden
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="m12 5 7 7-7 7" />
-            </svg>
-          </button>
-          <button className="w-full sm:w-auto px-8 py-3.5 bg-white border border-slate-200 text-slate-600 text-sm font-medium rounded-full hover:bg-slate-50 hover:border-slate-300 transition-all flex items-center justify-center gap-2">
-            <svg
-              aria-hidden
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <polygon points="10 8 16 12 10 16 10 8" />
-            </svg>
-            Watch Demo
-          </button>
-        </div> */}
-
         <CTASection />
-
 
         {/* Inner frame divider (between CTAs and mock) */}
         <div
