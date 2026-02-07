@@ -30,7 +30,7 @@ export default function Page() {
             <div className="relative w-full max-w-md">
               <div
                 aria-hidden
-                className="pointer-events-none absolute -top-11 -left-6 -right-6 h-10 bg-[repeating-linear-gradient(135deg,rgba(148,163,184,0.45)_0,rgba(148,163,184,0.45)_2px,transparent_2px,transparent_10px)]"
+                className="pointer-events-none absolute -top-21 -left-6 -right-6 h-19 bg-[repeating-linear-gradient(135deg,rgba(148,163,184,0.45)_0,rgba(148,163,184,0.45)_2px,transparent_2px,transparent_10px)]"
               />
               <div
                 aria-hidden
@@ -42,7 +42,7 @@ export default function Page() {
               />
               <div
                 aria-hidden
-                className="pointer-events-none absolute -bottom-11 -left-6 -right-6 h-10 bg-[repeating-linear-gradient(135deg,rgba(148,163,184,0.45)_0,rgba(148,163,184,0.45)_2px,transparent_2px,transparent_10px)]"
+                className="pointer-events-none absolute -bottom-21 -left-6 -right-6 h-19 bg-[repeating-linear-gradient(135deg,rgba(148,163,184,0.45)_0,rgba(148,163,184,0.45)_2px,transparent_2px,transparent_10px)]"
               />
 
               <div className="pt-6 pb-6">
@@ -50,10 +50,10 @@ export default function Page() {
                 <Image src="/feature-logo.png" width={36} height={36} alt="FeatureFlow" />
               </Link>
 
-              <h1 className="mt-4 text-2xl md:text-3xl font-semibold tracking-tight text-slate-900">
+              <h1 className="font-cooper mt-4 text-2xl md:text-3xl font-semibold tracking-tight text-slate-900">
                 Sign in
               </h1>
-              <p className="mt-3 text-sm text-slate-500 leading-relaxed">
+              <p className="font-sans mt-3 text-sm text-slate-500 leading-relaxed">
                 Welcome back. Manage flags, rollouts, and experiments with confidence.
               </p>
 
@@ -181,22 +181,36 @@ export default function Page() {
                     type="button"
                     className="h-11 rounded-md bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50 text-sm font-medium"
                   >
+                    <Image src="/assets/google.svg" width={16} height={16} alt="Google" className="inline mr-2" />
                     Google
                   </button>
                   <button
                     type="button"
-                    className="h-11 rounded-md bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50 text-sm font-medium"
+                    className="h-11 flex items-center justify-center rounded-md bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50 text-sm font-medium"
                   >
+                    <Image src="/assets/apple.svg" width={16} height={16} alt="Apple" className="inline mr-2" />
                     Apple
                   </button>
                 </div>
 
-                <p className="pt-2 text-xs text-slate-500 ">
+                  <p className="pt-3 text-[11px] leading-relaxed text-slate-500">
+                    By signing in, you agree to our{" "}
+                    <Link href="#" className="text-slate-700 underline underline-offset-4 decoration-slate-300 hover:decoration-slate-700">
+                      Terms of Service
+                    </Link>
+                    {" "}and{" "}
+                    <Link href="#" className="text-slate-700 underline underline-offset-4 decoration-slate-300 hover:decoration-slate-700">
+                      Privacy Policy
+                    </Link>
+                    .
+                  </p>
+
+                {/* <p className="pt-2 text-xs text-slate-500 ">
                   Don&apos;t have an account?{" "}
                   <Link href="#" className="text-slate-900 underline underline-offset-4 decoration-slate-300 hover:decoration-slate-900">
                     Sign up
                   </Link>
-                </p>
+                </p> */}
               </form>
               </div>
             </div>
@@ -204,10 +218,10 @@ export default function Page() {
 
           {/* Right: Video panel */}
           <div className="relative hidden lg:flex lg:col-span-3 items-center justify-center border-l border-dashed border-slate-200/60 p-6">
-            <div className="w-full h-full rounded-xl border border-slate-200/60 overflow-hidden bg-slate-50">
+            <div className="w-full h-full rounded-lg border border-slate-200/60 overflow-hidden bg-slate-50">
               <video
                 className="w-full h-full object-cover"
-                src="/assets/video.mp4"
+                src="/assets/video-1.mp4"
                 autoPlay
                 loop
                 muted
