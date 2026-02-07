@@ -1,188 +1,103 @@
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+
+const useCases = [
+  {
+    title: "Trunk-Based Development",
+    description:
+      "Merge code to main constantly. Keep features hidden behind flags until they are ready for prime time.",
+    image: "/assets/asset-4.png",
+  },
+  {
+    title: "Beta Testing Management",
+    description:
+      "Allow non-technical teams to manage beta access lists without requiring engineering support.",
+    image: "/assets/asset-5.png",
+  },
+  {
+    title: "Infrastructure Migration",
+    description:
+      "Safely migrate databases or services by routing a percentage of traffic to the new infrastructure.",
+    image: "/assets/asset-1.png",
+  },
+  {
+    title: "Paywall & Entitlements",
+    description:
+      "Control feature access based on subscription tiers dynamically without redeploying code.",
+    image: "/assets/asset-2.png",
+  },
+];
+
 export default function UseCases() {
   return (
-    <section id="enterprise" className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="reveal-text text-3xl font-semibold text-slate-900 tracking-tight text-center mb-16">
-          One platform, endless possibilities
-        </h2>
+    <section id="enterprise" className="relative bg-white">
+      {/* Diagonal rays background */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-rays-diagonal opacity-[0.45]" />
+        {/* Fade-out edges */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-white" />
+      </div>
+      {/* Isometric frame rails */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none">
+        <div className="mx-auto max-w-6xl h-full border-x border-slate-200/60" />
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="reveal-text stagger-1 group p-8 rounded-xl bg-slate-50 border border-slate-100 hover:border-slate-200 transition-colors">
-            <div className="flex items-start justify-between mb-4">
-              <div className="p-2 bg-white rounded-lg border border-slate-100 text-slate-900 shadow-sm">
-                <svg
-                  aria-hidden
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M4 7h16" />
-                  <path d="M4 12h10" />
-                  <path d="M4 17h16" />
-                </svg>
-              </div>
-              <svg
-                aria-hidden
-                className="text-slate-300 group-hover:text-slate-600 transition-colors"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M7 17 17 7" />
-                <path d="M7 7h10v10" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">
-              Trunk-Based Development
-            </h3>
-            <p className="text-sm text-slate-500">
-              Merge code to main constantly. Keep features hidden behind flags
-              until they are ready for prime time.
-            </p>
-          </div>
+      <div className="max-w-6xl mx-auto">
+        {/* Section header */}
+        <div className="text-center py-20 px-6 border-b border-dashed border-slate-200/80">
+          <p className="reveal-text text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-600 mb-5">
+            Use Cases
+          </p>
+          <h2 className="reveal-text stagger-1 font-cooper text-3xl md:text-[2.75rem] font-medium text-slate-900 tracking-tight mb-5 leading-[1.1]">
+            One platform,<br className="hidden md:block" />
+            endless possibilities.
+          </h2>
+          <p className="reveal-text stagger-2 text-slate-500 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+            Whether you&apos;re rolling out to 10 users or 10 million, FeatureFlow
+            adapts to every stage of your product lifecycle.
+          </p>
+        </div>
 
-          <div className="reveal-text stagger-2 group p-8 rounded-xl bg-slate-50 border border-slate-100 hover:border-slate-200 transition-colors">
-            <div className="flex items-start justify-between mb-4">
-              <div className="p-2 bg-white rounded-lg border border-slate-100 text-slate-900 shadow-sm">
-                <svg
-                  aria-hidden
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                  <circle cx="8.5" cy="7" r="4" />
-                  <path d="M20 8v6" />
-                  <path d="M23 11h-6" />
-                </svg>
+        {/* 2x2 bordered grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 border-b border-slate-200/60">
+          {useCases.map((useCase, index) => (
+            <div
+              key={useCase.title}
+              className={`reveal-text stagger-${index + 1} group
+                ${index % 2 === 0 ? "md:border-r" : ""} 
+                ${index < 2 ? "border-b" : ""} 
+                border-slate-200/60 transition-colors duration-300 hover:bg-slate-50/50`}
+            >
+              {/* Image area */}
+              <div className="p-6 pb-0">
+                <div className="rounded-xl border border-dashed border-slate-200/80 p-4 flex items-center justify-center bg-slate-50/30 min-h-[180px]">
+                  <Image
+                    src={useCase.image}
+                    alt={useCase.title}
+                    width={320}
+                    height={180}
+                    className="object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                  />
+                </div>
               </div>
-              <svg
-                aria-hidden
-                className="text-slate-300 group-hover:text-slate-600 transition-colors"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M7 17 17 7" />
-                <path d="M7 7h10v10" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">
-              Beta Testing Management
-            </h3>
-            <p className="text-sm text-slate-500">
-              Allow non-technical teams to manage beta access lists without
-              requiring engineering support.
-            </p>
-          </div>
 
-          <div className="reveal-text stagger-3 group p-8 rounded-xl bg-slate-50 border border-slate-100 hover:border-slate-200 transition-colors">
-            <div className="flex items-start justify-between mb-4">
-              <div className="p-2 bg-white rounded-lg border border-slate-100 text-slate-900 shadow-sm">
-                <svg
-                  aria-hidden
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect width="18" height="12" x="3" y="6" rx="2" />
-                  <path d="M7 18v2" />
-                  <path d="M17 18v2" />
-                  <path d="M8 14h8" />
-                </svg>
+              {/* Text content */}
+              <div className="p-6 pt-5">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-base font-semibold text-slate-900 mb-2">
+                      {useCase.title}
+                    </h3>
+                    <p className="text-sm text-slate-500 leading-relaxed">
+                      {useCase.description}
+                    </p>
+                  </div>
+                  <ArrowUpRight className="w-5 h-5 text-slate-300 group-hover:text-slate-600 transition-colors duration-200 flex-shrink-0 mt-0.5" aria-hidden />
+                </div>
               </div>
-              <svg
-                aria-hidden
-                className="text-slate-300 group-hover:text-slate-600 transition-colors"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M7 17 17 7" />
-                <path d="M7 7h10v10" />
-              </svg>
             </div>
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">
-              Infrastructure Migration
-            </h3>
-            <p className="text-sm text-slate-500">
-              Safely migrate databases or services by routing a percentage of
-              traffic to the new infrastructure.
-            </p>
-          </div>
-
-          <div className="reveal-text stagger-4 group p-8 rounded-xl bg-slate-50 border border-slate-100 hover:border-slate-200 transition-colors">
-            <div className="flex items-start justify-between mb-4">
-              <div className="p-2 bg-white rounded-lg border border-slate-100 text-slate-900 shadow-sm">
-                <svg
-                  aria-hidden
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M3 3v18h18" />
-                  <path d="m19 9-5 5-4-4-3 3" />
-                </svg>
-              </div>
-              <svg
-                aria-hidden
-                className="text-slate-300 group-hover:text-slate-600 transition-colors"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M7 17 17 7" />
-                <path d="M7 7h10v10" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">
-              Paywall &amp; Entitlements
-            </h3>
-            <p className="text-sm text-slate-500">
-              Control feature access based on subscription tiers dynamically
-              without redeploying code.
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </section>

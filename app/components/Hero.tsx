@@ -76,13 +76,16 @@ export default function Hero() {
           </button>
         </div> */}
 
-        <CTASection/>
+        <CTASection />
+
 
         {/* Inner frame divider (between CTAs and mock) */}
         <div
           aria-hidden
           className="reveal-text stagger-4 w-screen relative left-1/2 -translate-x-1/2 border-t border-slate-200/60 mb-16"
         />
+       
+
 
         <div className="reveal-text stagger-4 relative max-w-5xl mx-auto">
           <div className="relative bg-white rounded-xl border border-slate-200 shadow-2xl shadow-slate-200/50 overflow-hidden">

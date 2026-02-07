@@ -19,6 +19,17 @@
   line-height: 1.05;
 }
 
+.bg-rays {
+  background-image:
+    repeating-linear-gradient(
+      -30deg,
+      rgba(15, 23, 42, 0.04) 0px,
+      rgba(15, 23, 42, 0.04) 1px,
+      transparent 1px,
+      transparent 40px
+    );
+}
+
 
 @theme inline {
   /* Minimal shadcn-like tokens (so `border-border`, `bg-card`, etc. work) */
@@ -81,4 +92,55 @@ body {
   background: linear-gradient(to right, #0f172a, #334155);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Diagonal rays (angled repeating lines) */
+.bg-rays-diagonal {
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(15, 23, 42, 0.035) 0px,
+      rgba(15, 23, 42, 0.035) 1px,
+      transparent 1px,
+      transparent 28px
+    );
+}
+
+/* Floating card animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(0deg); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(-6deg); }
+  50% { transform: translateY(-6px) rotate(-4deg); }
+}
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px) rotate(3deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+.animate-float-slow {
+  animation: float-slow 4s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float-delayed 3.5s ease-in-out 0.5s infinite;
+}
+
+/* Waveform animation */
+@keyframes waveform {
+  0% { transform: scaleY(0.5); }
+  100% { transform: scaleY(1.2); }
+}
+
+/* Subtle pulse */
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+@keyframes pulse-subtle {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
 }
