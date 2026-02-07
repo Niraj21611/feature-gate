@@ -1,42 +1,46 @@
 @import "tailwindcss";
 
+
 :root {
-  /* Core Color System */
-  --ink-black: #0d1321;
-  --deep-space-blue: #1d2d44;
-  --blue-slate: #3e5c76;
-  --dusty-denim: #748cab;
-  --eggshell: #f0ebd8;
-  --accent-blue: #0055ff;
-  
-  /* Semantic Colors */
-  --background: var(--eggshell);
-  --background-dark: var(--ink-black);
-  --foreground: var(--ink-black);
-  --foreground-muted: var(--blue-slate);
-  --foreground-subtle: var(--dusty-denim);
-  --accent: var(--deep-space-blue);
-  
-  /* Surfaces */
-  --surface-light: #ffffff;
-  --surface-elevated: rgba(255, 255, 255, 0.7);
-  --surface-glass: rgba(255, 255, 255, 0.4);
-  --surface-dark: var(--deep-space-blue);
-  
-  /* Borders */
-  --border-light: rgba(13, 19, 33, 0.08);
-  --border-medium: rgba(13, 19, 33, 0.12);
-  --border-dark: rgba(240, 235, 216, 0.1);
+  --font-inter: ui-sans-serif;
 }
 
+@font-face {
+  font-family: "Cooper Lt BT";
+  src: url("/fonts/cooper.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-cooper {
+  font-family: "Cooper Lt BT", serif;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.bg-rays {
+  background-image:
+    repeating-linear-gradient(
+      -30deg,
+      rgba(15, 23, 42, 0.04) 0px,
+      rgba(15, 23, 42, 0.04) 1px,
+      transparent 1px,
+      transparent 40px
+    );
+}
+
+
 @theme inline {
-  --color-ink-black: var(--ink-black);
-  --color-deep-space-blue: var(--deep-space-blue);
-  --color-blue-slate: var(--blue-slate);
-  --color-dusty-denim: var(--dusty-denim);
-  --color-eggshell: var(--eggshell);
-  --color-accent-blue: var(--accent-blue);
-  --font-sans: var(--font-bricolage), system-ui, sans-serif;
+  /* Minimal shadcn-like tokens (so `border-border`, `bg-card`, etc. work) */
+  --color-border: rgba(148, 163, 184, 0.35); /* slate-400-ish */
+  --color-card: #0b0f14; /* deep near-black for the dithering card */
+  --color-muted: rgba(148, 163, 184, 0.12);
+  --color-muted-foreground: rgba(226, 232, 240, 0.72);
+  --color-foreground: #f8fafc; /* slate-50 */
+  --color-primary: #ec4e02; /* accent orange from component */
+  --color-primary-foreground: #0b0f14;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
 * {
@@ -49,16 +53,8 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-bricolage), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   line-height: 1.6;
-}
-
-/* Selection */
-::selection {
-  background: var(--deep-space-blue);
-  color: var(--eggshell);
 }
 
 /* Smooth scroll behavior */
@@ -68,23 +64,85 @@ body {
   }
 }
 
-/* Custom scrollbar - ultra minimal */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+
+/* Animation Classes (matches provided HTML) */
+.reveal-text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stagger-1 { transition-delay: 100ms; }
+.stagger-2 { transition-delay: 200ms; }
+.stagger-3 { transition-delay: 300ms; }
+.stagger-4 { transition-delay: 400ms; }
+
+/* Subtle Gradient Text */
+.text-gradient {
+  background: linear-gradient(to right, #0f172a, #334155);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
+/* Diagonal rays (angled repeating lines) */
+.bg-rays-diagonal {
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(15, 23, 42, 0.035) 0px,
+      rgba(15, 23, 42, 0.035) 1px,
+      transparent 1px,
+      transparent 28px
+    );
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--dusty-denim);
-  border-radius: 3px;
+/* Floating card animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(0deg); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(-6deg); }
+  50% { transform: translateY(-6px) rotate(-4deg); }
+}
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px) rotate(3deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--blue-slate);
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+.animate-float-slow {
+  animation: float-slow 4s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float-delayed 3.5s ease-in-out 0.5s infinite;
+}
+
+/* Waveform animation */
+@keyframes waveform {
+  0% { transform: scaleY(0.5); }
+  100% { transform: scaleY(1.2); }
+}
+
+/* Subtle pulse */
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+@keyframes pulse-subtle {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
 }
 
 /* Subtle fade-in animation */

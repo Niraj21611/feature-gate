@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import localFont from "next/font/local";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
+  preload: true,
 });
 
+
 export const metadata: Metadata = {
-  title: "FeatureGate | Ship Features with Confidence",
-  description: "The modern feature management platform for engineering teams. Deploy safely, experiment freely, and ship with confidence.",
+  title: "FeatureFlow - Intelligent Feature Management",
+  description:
+    "Decouple release from deployment. Manage features, run experiments, and rollback instantly without touching code.",
 };
 
 export default function RootLayout({
@@ -21,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${bricolage.variable} font-sans antialiased`}
+        className={`${inter.variable} bg-white text-slate-600 selection:bg-slate-900 selection:text-white overflow-x-hidden antialiased`}
       >
         {children}
       </body>
